@@ -16,6 +16,7 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: |
+        ls -al
         echo "1"
         cat ./dockerignore
         touch testfile
