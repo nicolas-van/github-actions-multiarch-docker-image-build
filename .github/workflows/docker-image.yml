@@ -16,11 +16,4 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: |
-        ls -al
-        echo "1"
-        cat .dockerignore
-        touch testfile
-        echo "testfile" >> .dockerignore
-        echo "2"
-        cat .dockerignore
         docker build . --file Dockerfile --tag my-image-name:$(date +%s)
