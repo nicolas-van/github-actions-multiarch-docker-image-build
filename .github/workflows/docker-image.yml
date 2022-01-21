@@ -18,4 +18,5 @@ jobs:
       run: |
         touch testfile
         echo "testfile" >> ./dockerignore
+        cat ./dockerignore
         docker build . --file Dockerfile --tag my-image-name:$(date +%s)
