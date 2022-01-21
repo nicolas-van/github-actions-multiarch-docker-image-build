@@ -36,4 +36,4 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: user/app:latest
+          tags: nicolas-van/github-actions-arm64-docker-image-build:latest
