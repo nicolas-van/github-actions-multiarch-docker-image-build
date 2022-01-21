@@ -18,9 +18,9 @@ jobs:
       run: |
         ls -al
         echo "1"
-        cat ./dockerignore
+        cat .dockerignore
         touch testfile
-        echo "testfile" >> ./dockerignore
+        echo "testfile" >> .dockerignore
         echo "2"
-        cat ./dockerignore
+        cat .dockerignore
         docker build . --file Dockerfile --tag my-image-name:$(date +%s)
