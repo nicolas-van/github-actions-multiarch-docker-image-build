@@ -22,29 +22,21 @@ jobs:
   build-docker-images:
     runs-on: ubuntu-latest
 
-    strategy:
-      fail-fast: false
-      matrix:
-        platform: [linux/amd64, linux/arm64, linux/arm/v7, linux/arm/v6]
-
     needs: test
 
     env:
       REGISTRY: ghcr.io
       IMAGE_NAME: ${{ github.repository }}
-      PLATFORM: ${{ matrix.platform }}
+      PLATFORMS: linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6
 
     steps:
       - uses: actions/checkout@v2
-      -
-        name: Set up QEMU
+      - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
-      -
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v1
-      -
-        name: Available platforms
+      - name: List available platforms
         run: echo ${{ steps.buildx.outputs.platforms }}
       - name: Log into registry ${{ env.REGISTRY }}
         uses: docker/login-action@v1
@@ -58,12 +50,12 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       -
-        name: Build and push
+        name: Build and push on tag
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           context: .
-          platforms: ${{ env.PLATFORM }}
+          platforms: ${{ env.PLATFORMS }}
           push: ${{ startsWith(github.ref, 'refs/tags/') }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
