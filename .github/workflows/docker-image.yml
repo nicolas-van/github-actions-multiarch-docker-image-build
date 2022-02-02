@@ -5,9 +5,7 @@ on:
   pull_request:
 
 jobs:
-
   test:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -27,14 +25,14 @@ jobs:
     - run: npm test
 
   builddockerimages:
+    runs-on: ubuntu-latest
+
     strategy:
       fail-fast: false
       matrix:
         platform: [linux/amd64, linux/arm64, linux/arm/v7, linux/arm/v6]
 
     needs: test
-
-    runs-on: ${{ matrix.OS }}
 
     env:
       REGISTRY: ghcr.io
