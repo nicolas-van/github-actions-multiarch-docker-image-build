@@ -19,7 +19,7 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
 
-  builddockerimages:
+  build-docker-images:
     runs-on: ubuntu-latest
 
     strategy:
