@@ -2,20 +2,52 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
-
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
-  PLATFORMS: linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6
 
 jobs:
 
-  build:
+  test:
 
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x, 14.x, 16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
+
+  build-docker-images:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - PLATFORM: linux/amd64
+        include:
+          - PLATFORM: linux/arm64
+        include:
+          - PLATFORM: linux/arm/v7
+        include:
+          - PLATFORM: linux/arm/v6
+
+    needs: test
+
+    env:
+      REGISTRY: ghcr.io
+      IMAGE_NAME: ${{ github.repository }}
+      PLATFORM: ${{ matrix.PLATFORM }}
 
     steps:
       - uses: actions/checkout@v2
@@ -47,6 +79,6 @@ jobs:
         with:
           context: .
           platforms: ${{ env.PLATFORMS }}
-          push: true
+          push: ${{ startsWith(github.ref, 'refs/tags/') }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
