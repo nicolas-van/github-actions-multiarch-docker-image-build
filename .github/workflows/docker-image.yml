@@ -30,18 +30,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - PLATFORM: linux/amd64
-            OS: ubuntu-latest
-        include:
-          - PLATFORM: linux/arm64
-            OS: ubuntu-latest
-        include:
-          - PLATFORM: linux/arm/v7
-            OS: ubuntu-latest
-        include:
-          - PLATFORM: linux/arm/v6
-            OS: ubuntu-latest
+        platform: [linux/amd64, linux/arm64, linux/arm/v7, linux/arm/v6]
 
     needs: test
 
@@ -50,7 +39,7 @@ jobs:
     env:
       REGISTRY: ghcr.io
       IMAGE_NAME: ${{ github.repository }}
-      PLATFORM: ${{ matrix.PLATFORM }}
+      PLATFORM: ${{ matrix.platform }}
 
     steps:
       - uses: actions/checkout@v2
