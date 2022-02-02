@@ -9,7 +9,7 @@ An example Github Actions configuration to build a Docker image for the followin
 * linux/arm/v7 (newer Raspberry Pis)
 * linux/arm/v6 (older Raspberry Pis)
 
-You can see the workflow configuration here: [`.github/workflows/docker-multiarch-image.yml`](./.github/workflows/docker-multiarch-image.yml).
+You can see the workflow configuration here: [`.github/workflows/docker-multiarch-image.yml`](./.github/workflows/docker-multiarch-image.yml). It should work for most projects as long as a `Dockerfile` exists at the root of the repository.
 
 This repository builds an example http server in Node.js displaying a "Hello World" for these four architectures. It was tested on the following machines:
 
