@@ -34,13 +34,17 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - PLATFORM: linux/amd64
+          -
+            PLATFORM: linux/amd64
         include:
-          - PLATFORM: linux/arm64
+          -
+            PLATFORM: linux/arm64
         include:
-          - PLATFORM: linux/arm/v7
+          -
+            PLATFORM: linux/arm/v7
         include:
-          - PLATFORM: linux/arm/v6
+          -
+            PLATFORM: linux/arm/v6
 
     needs: test
 
