@@ -26,8 +26,7 @@ jobs:
     - run: npm run build --if-present
     - run: npm test
 
-  build-docker-images:
-
+  builddockerimages:
     strategy:
       fail-fast: false
       matrix:
