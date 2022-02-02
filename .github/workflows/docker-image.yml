@@ -28,25 +28,25 @@ jobs:
 
   build-docker-images:
 
-    runs-on: ubuntu-latest
-
     strategy:
       fail-fast: false
       matrix:
         include:
-          -
-            PLATFORM: linux/amd64
+          - PLATFORM: linux/amd64
+            OS: ubuntu-latest
         include:
-          -
-            PLATFORM: linux/arm64
+          - PLATFORM: linux/arm64
+            OS: ubuntu-latest
         include:
-          -
-            PLATFORM: linux/arm/v7
+          - PLATFORM: linux/arm/v7
+            OS: ubuntu-latest
         include:
-          -
-            PLATFORM: linux/arm/v6
+          - PLATFORM: linux/arm/v6
+            OS: ubuntu-latest
 
     needs: test
+
+    runs-on: ${{ matrix.OS }}
 
     env:
       REGISTRY: ghcr.io
