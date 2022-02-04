@@ -16,7 +16,7 @@ This repository builds an example http server in Node.js displaying a "Hello Wor
 * An x86-64 Windows using Docker for Windows.
 * An AWS t4g instance using an ARM64 processor.
 
-No tests were performed on Raspberry Pis because I'm lazy.
+No tests were performed on Raspberry Pis until now because I'm lazy.
 
 You can test these images yourself by using this command:
 
