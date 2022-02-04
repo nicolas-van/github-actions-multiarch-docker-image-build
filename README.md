@@ -2,7 +2,7 @@
 
 [![Docker Multiarch Image CI](https://github.com/nicolas-van/github-actions-multiarch-docker-image-build/actions/workflows/docker-multiarch-image.yml/badge.svg)](https://github.com/nicolas-van/github-actions-multiarch-docker-image-build/actions/workflows/docker-multiarch-image.yml)
 
-An example Github Actions configuration to build a Docker image for the following systems:
+An example Github Actions configuration to build a Docker image for the following architectures:
 
 * linux/amd64 (typical x86-64 architecture)
 * linux/arm64 (t4g instances on AWS)
